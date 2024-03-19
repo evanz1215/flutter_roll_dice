@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class DiceRoller extends StatefulWidget {
   const DiceRoller({super.key});
@@ -12,13 +13,14 @@ class DiceRoller extends StatefulWidget {
 class _DiceRollerState extends State<DiceRoller> {
   var activeDiceImage = "assets/images/dice-2.png";
 
+  var currentDiceRoll = 2;
+
   void rollDice() {
     setState(() {
       // 使用setState()來更新UI
-      // ramdom 1~6
-      var randomNumber = 1 + (DateTime.now().millisecond % 6);
-      activeDiceImage = "assets/images/dice-$randomNumber.png";
       // activeDiceImage = "assets/images/dice-4.png";
+
+      currentDiceRoll = Random().nextInt(6) + 1;
     });
   }
 
@@ -28,7 +30,7 @@ class _DiceRollerState extends State<DiceRoller> {
       mainAxisSize: MainAxisSize.min, //占用最小的空间，預設為最大(MainAxisSize.max)
       children: [
         Image.asset(
-          activeDiceImage,
+          "assets/images/dice-$currentDiceRoll.png",
           width: 200,
         ),
         // const SizedBox(height: 20), // 2. 使用SizedBox,來調整上方的間距
